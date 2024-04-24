@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 
 import useDayKor from "../../shared/hooks/useDayKor";
+import { setTitle } from "../../shared/redux/modules/title";
 
 const ListItemStyled = styled.div`
 display: flex;
@@ -24,8 +26,14 @@ button {
 
 const ListItem = (props) => {
     const nav = useNavigate();
+    const dispatch = useDispatch();
 
     const day = useDayKor(props.date); // 무슨 요일이니?
+
+    const handleClickModify = () => {
+        dispatch(setTitle(day)); // title(Header 문구) 수정
+        nav('/detail/' + props.id);
+    }
 
     return (
         <ListItemStyled>
@@ -37,9 +45,7 @@ const ListItem = (props) => {
                 : '-'
                 }</span>
             </div>
-            <button onClick={() => {
-                nav('/detail/' + props.id);
-            }}>수정</button>
+            <button onClick={handleClickModify}>수정</button>
         </ListItemStyled>
     );
 }
