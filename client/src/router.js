@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import ConditionList from "./pages/ConditionList";
+import ConditionList from "./pages/List/ConditionList";
 import ConditionDetail from "./pages/ConditionDetail";
 
 const router = createBrowserRouter([
