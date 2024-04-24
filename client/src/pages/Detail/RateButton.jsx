@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
@@ -10,26 +10,38 @@ span {
 }
 `;
 
-const RateButton = () => {
-    const [rate, setRate] = useState([false, false, false, false, false]);
+const RateButton = (props) => {
+    const [star, setStar] = useState([false, false, false, false, false]);
 
+    useEffect(() => {
+        setStarAccordingToRate(props.detail.rate);
+    }, [props.detail.rate]);
+    
     const handleClickRate = (idx) => {
-        let dummyRate = new Array(rate); // 깊은 복사. 얕은 복사 시 rate에 직접 수정을 시도하게 되는 것이므로 깊은 복사 처리해야 한다
-        
-        for (let i = 0; i < idx; i++) {
-            dummyRate[i] = true;
-        }
-        for (let i = idx; i < 5; i++) {
-            dummyRate[i] = false;
-        }
+        setStarAccordingToRate(idx);
+        props.setDetail({
+            ...props.detail,
+            rate: idx,
+        });
+    }
 
-        setRate(dummyRate);
+    const setStarAccordingToRate = (howMany) => {
+        let dummyStar = new Array(star);
+            
+        for (let i = 0; i < howMany; i++) {
+            dummyStar[i] = true;
+        }
+        for (let i = howMany; i < 5; i++) {
+            dummyStar[i] = false;
+        }
+    
+        setStar(dummyStar);
     }
 
     return (
         <RateButtonStyled>
             {
-                rate.map((ele, idx) => (
+                star.map((ele, idx) => (
                     <span key={idx} onClick={() => handleClickRate(idx + 1)}>{ele ? '★' : '☆'}</span>
                 ))
             }
