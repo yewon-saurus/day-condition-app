@@ -43,9 +43,9 @@ const ConditionDetail = () => {
     }
 
     const handleClickSave = async () => {
-        // const response = await httpRequest('PATCH', '/conditions/', {
-        //     "rate": rate,
-        // });
+        await httpRequest('PATCH', '/conditions/' + params.id, {
+            "rate": detail.rate,
+        });
 
         dispatch(initTitle()); // title(Header 문구) 초기화
         nav('/'); // List page로 돌아가기

@@ -15,6 +15,10 @@ async function httpRequest(method='GET', url='/', data={}) {
         response = await axios.get(requestURL);
     }
 
+    if (method === 'PATCH') {
+        response = await axios.patch(requestURL, data)
+    }
+
     return response;
 }
 
