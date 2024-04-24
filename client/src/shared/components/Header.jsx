@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const HeaderStyled = styled.div`
 text-align: center;
@@ -7,9 +8,11 @@ padding: .5em;
 `;
 
 const Header = () => {
+    const title = useSelector((state) => state.title.title);
+
     return (
         <HeaderStyled>
-            일주일 컨디션
+            {title}
         </HeaderStyled>
     );
 }
